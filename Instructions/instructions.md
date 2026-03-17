@@ -70,6 +70,10 @@ These instructions outline how GitHub Copilot should approach writing code and r
    - Implement simple profile creation, saving to JSON files, and login validation.
    - Ensure profiles persist across sessions and include basic validation (e.g., unique usernames, required fields).
 
+10. **AI Usage & Logging**
+   - All AI-generated code, suggestions, and chat interactions related to this project must be logged to a simple text-based log (e.g., `.txt` file) or equivalent.
+   - The log should record at least timestamp, brief description of the change/request, and a reference to affected files or components.
+
 ---
 
 ## Response Style for the Assistant
