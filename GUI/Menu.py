@@ -3,6 +3,7 @@ from typing import Dict, Any
 
 from GUI.Scoreboard import ScoreboardView
 from Games.Game_1 import TRexGame
+from Games.Game_2 import OrbDefender
 
 
 class ArcadeMenu:
@@ -72,14 +73,31 @@ class ArcadeMenu:
         )
         game1_score_button.pack(pady=(0, 15))
 
-        # Game 2 placeholder (scoreboard only for now)
-        game2_button = tk.Button(
+        # Game 2 controls
+        game2_title = tk.Label(
+            game_frame,
+            text="Game 2 - Orb Defender",
+            font=("Arial", 18, "bold"),
+            fg="cyan",
+            bg="black",
+        )
+        game2_title.pack(pady=(0, 5))
+
+        game2_play_button = tk.Button(
+            game_frame,
+            text="Play Game 2",
+            font=("Arial", 16),
+            command=self.play_game2,
+        )
+        game2_play_button.pack(pady=5)
+
+        game2_score_button = tk.Button(
             game_frame,
             text="Game 2 - View Scoreboard",
-            font=("Arial", 16),
+            font=("Arial", 14),
             command=lambda: self.open_scoreboard(2),
         )
-        game2_button.pack(pady=10)
+        game2_score_button.pack(pady=(0, 15))
 
     def play_game1(self) -> None:
         """Start Game 1 (T-Rex runner) inside the main window."""
@@ -87,6 +105,18 @@ class ArcadeMenu:
 
         # When the game exits, rebuild the menu
         TRexGame(
+            self.root,
+            on_exit=self._build_menu,
+            current_profile=self.current_profile,
+            scores=self.scores,
+        )
+
+    def play_game2(self) -> None:
+        """Start Game 2 (Orb Defender) inside the main window."""
+        self._clear_screen()
+
+        # When the game exits, rebuild the menu
+        OrbDefender(
             self.root,
             on_exit=self._build_menu,
             current_profile=self.current_profile,
