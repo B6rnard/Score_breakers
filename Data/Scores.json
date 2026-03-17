@@ -2,6 +2,13 @@
   "game1": [
     {
       "player": "Guest",
+<<<<<<< HEAD
+=======
+      "score": 1982
+    },
+    {
+      "player": "Guest",
+>>>>>>> 95a15173a078552cbab25d5581431436a6f9daeb
       "score": 317
     },
     {
@@ -10,9 +17,46 @@
     },
     {
       "player": "Guest",
+      "score": 102
+    },
+    {
+      "player": "Guest",
+      "score": 102
+    },
+    {
+      "player": "Guest",
+      "score": 96
+    },
+    {
+      "player": "Guest",
       "score": 96
     }
   ],
-  "game2": [],
+  "game2": [
+    {
+      "player": "Guest",
+      "score": 270
+    },
+    {
+      "player": "Guest",
+      "score": 0
+    },
+    {
+      "player": "Guest",
+      "score": 0
+    },
+    {
+      "player": "Guest",
+      "score": 0
+    },
+    {
+      "player": "Guest",
+      "score": 0
+    },
+    {
+      "player": "Guest",
+      "score": 0
+    }
+  ],
   "game3": []
 }
