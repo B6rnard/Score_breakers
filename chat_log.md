@@ -26,5 +26,52 @@ Then, I configured Python environment and tried running Main.py, but the tool ca
 
 **User:** perfect but it seems you did not put our converstaion in the chat_log.md, why is that?
 
-**GitHub Copilot:** [Updating the log now.]</content>
+**GitHub Copilot:** [Updating the log now.]
+
+## Session 2
+
+**User:** we want to make a button in the top right of the aplication that allows you to execute a flask server file that will display the scores so you are able to host like a lan where everybodys scores will be displayed
+
+**GitHub Copilot:** Created a complete LAN scoreboard system with the following implementation:
+- Created `flask_server.py` with a Flask application that serves a beautiful arcade-themed web interface displaying scores from all games
+- Modified `Main.py` to add a **🖥️ Start LAN** button in the top-right corner that launches the Flask server in a background thread
+- The server displays on port 5000 and shows the local IP address for network access
+- Web interface features auto-refresh every 5 seconds, top 10 rankings per game, and retro arcade neon styling
+- Created `LAN_SERVER_GUIDE.md` with complete documentation
+- Added `requirements.txt` with Flask dependency (Flask 2.3.3 already installed)
+- Server runs in background thread so GUI remains responsive
+- Button toggles between "Start LAN" (green) and "Stop LAN" (red) states
+
+All files were syntax-checked and are ready to use.
+
+**User:** oh and also as stated in the instructions, this conversation we just had needs to be logged in the chat_log.md
+
+**GitHub Copilot:** Logging this conversation to chat_log.md now.
+
+## Session 3
+
+**User:** why did i get that error?
+
+**GitHub Copilot:** Checked project files and found an import error in flask_server.py where Flask couldn't be resolved. Recommended restarting Python language server, verifying Flask installation, and checking which Python interpreter VS Code is using.
+
+**User:** [Shared PowerShell error about execution policy preventing script activation]
+```
+& : File C:\Users\corne\OneDrive\Documents\GitHub\Score_breakers\.venv\Scripts\Activate.ps1 cannot be loaded because running scripts is disabled on this system.
+```
+
+**GitHub Copilot:** Provided three options to fix the PowerShell execution policy issue:
+- Option 1: Use batch activation script instead (`.venv\Scripts\activate.bat`)
+- Option 2: Bypass execution policy for current session only
+- Option 3: Change execution policy permanently for user
+
+Recommended Option 1 as the quickest solution.
+
+**User:** then lets go with option 1. and remember the whole conversation gotta be logged into the chat_log.md file.
+
+**GitHub Copilot:** 
+1. Ran the batch activation script and started Main.py: `.venv\Scripts\activate.bat ; python Main.py`
+2. App started but encountered a Tkinter error: The `server_status` label was being destroyed by the `clear_main_area()` function when screens changed, but the code was still trying to update it later
+3. Fixed the issue by adding `server_status` to the list of protected widgets that should never be destroyed:
+   - Modified `clear_main_area()` to preserve `profile_label`, `server_frame`, AND `server_status`
+4. Updated chat_log.md with full conversation history</content>
 <parameter name="filePath">c:\Users\corne\OneDrive\Documents\GitHub\Score_breakers\chat_log.md

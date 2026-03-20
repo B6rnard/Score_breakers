@@ -5,6 +5,11 @@
       "score": 96
     }
   ],
-  "game2": [],
+  "game2": [
+    {
+      "player": "Guest",
+      "score": 30
+    }
+  ],
   "game3": []
 }
