@@ -1,11 +1,23 @@
 {
   "game1": [
     {
+      "player": "Emil",
+      "score": 428
+    },
+    {
+      "player": "Corner",
+      "score": 209
+    },
+    {
       "player": "Guest",
       "score": 96
     }
   ],
   "game2": [
+    {
+      "player": "Corner",
+      "score": 230
+    },
     {
       "player": "Guest",
       "score": 30

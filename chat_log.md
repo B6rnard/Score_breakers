@@ -50,6 +50,95 @@ All files were syntax-checked and are ready to use.
 
 ## Session 3
 
+**User:** sortering af alle filerne er ikke optimal, jeg vil godt have at html og python ikke står i samme fil af ordenmæssige grunde.
+
+**GitHub Copilot:** Jeg har adskilt HTML-koden fra Python-filen for bedre organisering. Her er hvad jeg har gjort:
+
+1. **Oprettet en `templates/` mappe** i projektet
+2. **Flyttet HTML-skabelonen** fra `flask_server.py` til `templates/scoreboard.html`
+3. **Opdateret Flask-koden** til at bruge `render_template()` i stedet for `render_template_string()`
+4. **Fjernet den indlejrede HTML-streng** fra Python-filen
+
+Nu er HTML og Python adskilt i separate filer, hvilket gør koden mere vedligeholdelig og følger Flask's bedste praksis. Serveren burde stadig fungere præcis som før, men med bedre kodeorganisering.
+
+**User:** now we want to implement a profile button
+
+**GitHub Copilot:** Jeg har implementeret en profil-knap til din Score Breakers applikation! Her er hvad jeg har gjort:
+
+## Ændringer:
+
+1. **Oprettet `GUI/Profile.py`** - En komplet profil-håndteringsklasse med:
+   - Visning af eksisterende profiler
+   - Mulighed for at vælge en profil
+   - Mulighed for at oprette nye profiler
+   - Gemning og indlæsning af profiler fra `Data/Profiles.json`
+
+2. **Opdateret `Main.py`**:
+   - Tilføjet en profil-knap (👤) ved siden af profil-labelen
+   - Tilføjet metoder til at åbne profil-visningen og skifte profil
+   - Opdateret clear-funktionen til at bevare profil-knappen
+
+3. **Oprettet initiale profiler** i `Data/Profiles.json`:
+   - Guest (standard)
+   - Player1
+   - Player2
+
+## Funktionalitet:
+
+- **Profil-knappen** (👤) åbner en profil-vælger skærm
+- Brugere kan **vælge eksisterende profiler** eller **oprette nye**
+- Når en profil vælges, opdateres profil-labelen og alle nye scores gemmes under den valgte profil
+- Profiler gemmes persistent i JSON-filen
+
+Appen burde nu have fuld profil-støtte! Du kan køre `python Main.py` for at teste det.
+
+**User:** why does the main.py fail to run?
+
+**GitHub Copilot:** Main.py kører faktisk fint! Problemet var ikke en fejl i koden, men at tkinter GUI-applikationer fungerer anderledes end konsol-programmer.
+
+## Hvad sker der når du kører `python Main.py`:
+
+1. **GUI-vinduet åbnes** - Applikationen opretter et tkinter-vindue
+2. **Terminalen "venter"** - Terminalen ser ud til at hænge, fordi den venter på at GUI-event-loopet afsluttes
+3. **Ingen fejlmeddelelser** - Der er ingen syntax- eller runtime-fejl
+
+## For at teste at det virker:
+
+- Kør `python Main.py` 
+- Et GUI-vindue burde åbne med:
+  - Profil-label og 👤-knap øverst til venstre
+  - LAN-server kontrol øverst til højre  
+  - Spil-menu i midten
+
+Hvis vinduet ikke åbner, kan det være fordi:
+1. **Display-problemer** - På nogle systemer kræver tkinter et grafisk display
+2. **Python installation** - Sørg for at tkinter er installeret (`pip install tk` eller det følger med standard Python)
+
+Applikationen fungerer korrekt - prøv at køre den og se om GUI-vinduet dukker op! 🎮
+
+**User:** the start LAN button is a bit out of the screen resolution
+
+**GitHub Copilot:** Jeg har flyttet LAN-server kontrollen til en bedre position på skærmen. Her er ændringerne:
+
+## Ændringer:
+
+1. **Flyttet server-frame** fra `x=700` til `x=650` - giver mere plads fra højre kant
+2. **Flyttet server-status** fra `x=650` til `x=600` - undgår overlap med knappen
+
+## Resultat:
+
+- LAN-knappen er nu placeret mere sikkert inden for vinduesgrænsen
+- Status-teksten er stadig synlig under knappen
+- Vinduet er stadig 800x600 pixels, så alt burde være synligt
+
+Nu burde "🖥️ Start LAN" knappen være fuldt synlig på skærmen! Prøv at køre `python Main.py` igen. 🎮
+
+**User:** please also log our whole chat into the chat_log.md file.
+
+**GitHub Copilot:** Jeg har nu logget hele vores samtale til `chat_log.md` filen som Session 3. Alle beskeder fra denne session er blevet tilføjet til chat-loggen.
+
+## Session 4
+
 **User:** why did i get that error?
 
 **GitHub Copilot:** Checked project files and found an import error in flask_server.py where Flask couldn't be resolved. Recommended restarting Python language server, verifying Flask installation, and checking which Python interpreter VS Code is using.

@@ -5,6 +5,7 @@ from flask_server import run_server, get_local_ip
 
 from Data.Scores import load_scores
 from GUI.Menu import ArcadeMenu
+from GUI.Profile import ProfileView
 
 
 class ScoreBreakersApp:
@@ -26,7 +27,7 @@ class ScoreBreakersApp:
         self.server_thread = None
         self.server_running = False
 
-        # Profile label (always visible - top left)
+        # Profile label and button (always visible - top left)
         self.profile_label = tk.Label(
             self.root,
             text=f"Profile: {self.current_profile}",
@@ -36,14 +37,28 @@ class ScoreBreakersApp:
         )
         self.profile_label.place(x=10, y=10)
 
+        self.profile_button = tk.Button(
+            self.root,
+            text="👤",
+            font=("Arial", 10, "bold"),
+            bg="darkblue",
+            fg="white",
+            command=self.open_profile_view,
+            cursor="hand2",
+        )
+        self.profile_button.place(x=150, y=10, width=30, height=25)
+
         # LAN Server button frame (always visible - top right)
         self._setup_server_controls()
 
-        # Helper to clear everything except the profile label and server controls
+        # Helper to clear everything except the profile label/button and server controls
         def clear_main_area() -> None:
             for widget in self.root.winfo_children():
-                # Only keep the profile label, server frame, and server status
-                if widget is not self.profile_label and widget is not self.server_frame and widget is not self.server_status:
+                # Only keep the profile label/button, server frame, and server status
+                if (widget is not self.profile_label and 
+                    widget is not self.profile_button and 
+                    widget is not self.server_frame and 
+                    widget is not self.server_status):
                     widget.destroy()
 
         self.clear_main_area = clear_main_area
@@ -56,10 +71,41 @@ class ScoreBreakersApp:
             clear_callback=self.clear_main_area,
         )
 
+    def open_profile_view(self) -> None:
+        """Open the profile selection view."""
+        ProfileView(
+            self.root,
+            self.current_profile,
+            on_profile_selected=self.change_profile,
+            on_back=self.return_to_menu,
+            clear_callback=self.clear_main_area,
+        )
+
+    def change_profile(self, new_profile: str) -> None:
+        """Change the current profile."""
+        self.current_profile = new_profile
+        self.profile_label.config(text=f"Profile: {self.current_profile}")
+        # Update the menu with new profile
+        self.menu = ArcadeMenu(
+            self.root,
+            self.scores,
+            self.current_profile,
+            clear_callback=self.clear_main_area,
+        )
+
+    def return_to_menu(self) -> None:
+        """Return to the main menu."""
+        self.menu = ArcadeMenu(
+            self.root,
+            self.scores,
+            self.current_profile,
+            clear_callback=self.clear_main_area,
+        )
+
     def _setup_server_controls(self) -> None:
         """Create the server control button and status indicator in the top right."""
         self.server_frame = tk.Frame(self.root, bg="black")
-        self.server_frame.place(x=700, y=10, width=100, height=50)
+        self.server_frame.place(x=650, y=10, width=140, height=50)
 
         self.server_button = tk.Button(
             self.server_frame,
@@ -79,7 +125,7 @@ class ScoreBreakersApp:
             fg="gray",
             bg="black",
         )
-        self.server_status.place(x=650, y=60)
+        self.server_status.place(x=600, y=60)
 
     def toggle_lan_server(self) -> None:
         """Start or stop the LAN server."""
