@@ -1,0 +1,2 @@
+overvej hvordan I synkroniserer - to filer vs 1 file
+Er det kun master der har begge scores, eller er den scores distribuerede?
